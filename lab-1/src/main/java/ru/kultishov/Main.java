@@ -12,11 +12,8 @@ public class Main {
         Path inputFile = Path.of("lab-1/src/main/resources/characters.csv");
         Path outputFile = Path.of("lab-1/src/main/resources/status-counts.csv");
 
-        CharacterStatusService characterStatusService = new CharacterStatusService();
-        StatusCountWriter statusCountWriter = new StatusCountWriter();
-
-        Map<String, Integer> statusCounts = characterStatusService.countByStatus(inputFile);
-        statusCountWriter.write(outputFile, statusCounts);
+        Map<String, Integer> statusCounts = CharacterStatusService.countByStatus(inputFile);
+        StatusCountWriter.write(outputFile, statusCounts);
 
         System.out.println("Выходной файл успешно создан по пути: " + outputFile.toAbsolutePath());
     }

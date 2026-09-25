@@ -2,7 +2,6 @@ package ru.kultishov.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,11 +9,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CharacterStatusService {
-    public Map<String, Integer> countByStatus(Path inputFile) {
+    public static Map<String, Integer> countByStatus(Path inputFile) {
         HashMap<String, Integer> statusCounts = new HashMap<>();
 
         try (BufferedReader reader = Files.newBufferedReader(inputFile, StandardCharsets.UTF_8)) {
-            reader.readLine();
+            if (reader.readLine() == null) throw new IllegalArgumentException("Файл пуст");
 
             String line;
             while ((line = reader.readLine()) != null) {
